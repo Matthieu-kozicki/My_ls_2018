@@ -11,6 +11,7 @@ SRC	=	src/my_strlen.c \
 		src/my_put_nbr.c \
 		src/my_revstr.c \
 		src/my_printf.c \
+		src/flags.c \
 
 SRCM	=	src/main.c
 

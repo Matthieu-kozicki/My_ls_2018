@@ -7,8 +7,8 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-#include "my.h"
 #include <stdlib.h>
+#include "my.h"
 
 int my_put_base(char *base, unsigned int nb)
 {
