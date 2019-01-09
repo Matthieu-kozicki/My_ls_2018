@@ -38,7 +38,12 @@ void no_flag_path(char *arg)
     struct dirent *file;
     DIR *rep = opendir(arg);
 
-    while (file = readdir(rep)) {
+    if (rep == NULL) {
+        my_printf("%s\n",arg);
+        closedir(rep);
+        return;
+    }
+    while ((file = readdir(rep)) != NULL) {
         if (file->d_name[0] != '.')
             my_printf("%s  ", file->d_name);
     }
