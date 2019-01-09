@@ -10,6 +10,11 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <pwd.h>
+#include <grp.h>
+#include <time.h>
 #include "my.h"
 
 int parser(int arc, char **arg)
@@ -20,6 +25,8 @@ int parser(int arc, char **arg)
         flag_a(arg[2]);
     if (arg[1][1] == 'd')
         flag_d(arg[2]);
+    if (arg[1][1] == 'l')
+        flag_l(arc, arg);
 }
 
 int main(int arc, char **arg)

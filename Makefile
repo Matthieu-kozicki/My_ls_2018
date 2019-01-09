@@ -12,6 +12,8 @@ SRC	=	src/my_strlen.c \
 		src/my_revstr.c \
 		src/my_printf.c \
 		src/flags.c \
+		src/flag_l.c \
+		src/print_right.c \
 
 SRCM	=	src/main.c
 
