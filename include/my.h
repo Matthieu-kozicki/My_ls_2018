@@ -22,7 +22,7 @@ void print_right(struct stat file);
 
 //flags
 void flag_a(char *arg);
-void flag_d(char *arg);
+void flag_d(int arc, char **arg);
 void flag_l(int arc, char **arg);
 void no_flag_path(char *arg);
 void no_flag(void);

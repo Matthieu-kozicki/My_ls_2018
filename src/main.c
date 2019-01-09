@@ -24,7 +24,7 @@ int parser(int arc, char **arg)
     if (arg[1][1] == 'a')
         flag_a(arg[2]);
     if (arg[1][1] == 'd')
-        flag_d(arg[2]);
+        flag_d(arc, arg);
     if (arg[1][1] == 'l')
         flag_l(arc, arg);
 }

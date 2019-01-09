@@ -28,9 +28,12 @@ void flag_a(char *arg)
     closedir(rep);
 }
 
-void flag_d(char *arg)
+void flag_d(int arc, char **arg)
 {
-    my_printf("%s\n", arg);
+    if (arc == 2)
+        my_putchar('.');
+    if (arc == 3)
+        my_printf("%s\n", arg[2]);
 }
 
 void no_flag_path(char *arg)
