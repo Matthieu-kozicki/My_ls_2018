@@ -22,7 +22,7 @@ int parser(int arc, char **arg)
     if (arg[1][0] != '-')
         no_flag_path(arg[1]);
     if (arg[1][1] == 'a' && arg[1][0] == '-')
-        flag_a(arg[2]);
+        flag_a(arc, arg);
     if (arg[1][1] == 'd' && arg[1][0] == '-')
         flag_d(arc, arg);
     if (arg[1][1] == 'l' && arg[1][0] == '-' && arc == 3)

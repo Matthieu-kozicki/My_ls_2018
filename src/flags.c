@@ -17,11 +17,15 @@
 #include <time.h>
 #include "my.h"
 
-void flag_a(char *arg)
+void flag_a(int arc, char **arg)
 {
     struct dirent *file;
-    DIR *rep = opendir(arg);
+    DIR *rep;
 
+    if (arc == 2)
+        rep = opendir(".");
+    else
+        rep = opendir(arg[2]);
     while (file = readdir(rep))
         my_printf("%s ",file->d_name);
     my_printf("\n");
@@ -36,13 +40,23 @@ void flag_d(int arc, char **arg)
         my_printf("%s\n", arg[2]);
 }
 
+void real_file(char *str)
+{
+    struct stat file;
+
+    if (stat(str, &file) == 0)
+        my_printf("%s\n",str);
+    else
+        my_printf("No such file or directory\n");
+}
+
 void no_flag_path(char *arg)
 {
     struct dirent *file;
     DIR *rep = opendir(arg);
 
     if (rep == NULL) {
-        my_printf("%s\n",arg);
+        real_file(arg);
         closedir(rep);
         return;
     }
