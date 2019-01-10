@@ -71,3 +71,25 @@ void print_right(struct stat file)
         my_putchar('-');
     print_right2(file);
 }
+
+char *melt(char *str, char *cpy)
+{
+    int j = 0;
+    int k = 0;
+    int i = my_strlen(str) + my_strlen(cpy);
+    char *dest = malloc(sizeof(char) * i + 1);
+
+    while (str[j] != '\0') {
+        if (str[0] == '.' && str[1] != '.')
+            break;
+        dest[j] = str[j];
+        j++;
+    }
+    while (cpy[k] != '\0') {
+        dest[j] = cpy[k];
+        j++;
+        k++;
+    }
+    dest[j] = '\0';
+    return (dest);
+}

@@ -34,7 +34,7 @@ void print_date(char *str)
     my_putchar(' ');
 }
 
-void print_info(char *str)
+void print_info2(char *str)
 {
     struct stat file;
     struct passwd *pwd;
@@ -45,11 +45,46 @@ void print_info(char *str)
     print_right(file);
     pwd = getpwuid(file.st_uid);
     grp = getgrgid(file.st_gid);
-    my_printf("%d ", file.st_nlink);
-    my_printf("%s  ", pwd->pw_name);
+    my_printf("%d %s  ", file.st_nlink, pwd->pw_name);
     my_printf("%s  %d ", grp->gr_name, file.st_size);
     time = ctime(&(file.st_mtim.tv_sec));
     print_date(time);
+}
+
+void print_info(char *str, int arc, char **arg)
+{
+    struct stat file;
+    struct passwd *pwd;
+    struct group *grp;
+    char *time;
+    char *path;
+
+    path = melt(arg[2], str);
+    stat(path, &file);
+    print_right(file);
+    pwd = getpwuid(file.st_uid);
+    grp = getgrgid(file.st_gid);
+    my_printf("%d %s  ", file.st_nlink, pwd->pw_name);
+    my_printf("%s  %d ", grp->gr_name, file.st_size);
+    time = ctime(&(file.st_mtim.tv_sec));
+    print_date(time);
+    free(path);
+}
+
+void flag_l_here(int arc, char **arg)
+{
+    struct dirent *file;
+    DIR *rep;
+
+    my_printf("total\n");
+    rep = opendir(".");
+    while (file = readdir(rep)) {
+        if (file->d_name[0] != '.') {
+            print_info2(file->d_name);
+            my_printf("%s\n", file->d_name);
+        }
+    }
+    closedir(rep);
 }
 
 void flag_l(int arc, char **arg)
@@ -57,14 +92,11 @@ void flag_l(int arc, char **arg)
     struct dirent *file;
     DIR *rep;
 
-    if (arc == 2)
-        rep = opendir(".");
-    else
-        rep = opendir(arg[2]);
     my_printf("total\n");
+    rep = opendir(arg[2]);
     while (file = readdir(rep)) {
         if (file->d_name[0] != '.') {
-            print_info(file->d_name);
+            print_info(file->d_name, arc, arg);
             my_printf("%s\n",file->d_name);
         }
     }
