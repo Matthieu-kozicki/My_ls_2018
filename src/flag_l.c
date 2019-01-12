@@ -41,14 +41,17 @@ void print_info2(char *str)
     struct group *grp;
     char *time;
 
-    stat(str, &file);
-    print_right(file);
-    pwd = getpwuid(file.st_uid);
-    grp = getgrgid(file.st_gid);
-    my_printf("%d %s  ", file.st_nlink, pwd->pw_name);
-    my_printf("%s  %d ", grp->gr_name, file.st_size);
-    time = ctime(&(file.st_mtim.tv_sec));
-    print_date(time);
+    if(stat(str, &file) == 0) {
+        print_right(file);
+        pwd = getpwuid(file.st_uid);
+        grp = getgrgid(file.st_gid);
+        my_printf("%d %s  ", file.st_nlink, pwd->pw_name);
+        my_printf("%s  %d ", grp->gr_name, file.st_size);
+        time = ctime(&(file.st_mtim.tv_sec));
+        print_date(time);
+    }
+    else
+        my_printf("No such file or directory");
 }
 
 void print_info(char *str, int arc, char **arg)
