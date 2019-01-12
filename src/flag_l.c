@@ -76,7 +76,7 @@ void flag_l_here(int arc, char **arg)
     struct dirent *file;
     DIR *rep;
 
-    my_printf("total\n");
+    total_here(arg);
     rep = opendir(".");
     while (file = readdir(rep)) {
         if (file->d_name[0] != '.') {
@@ -92,7 +92,7 @@ void flag_l(int arc, char **arg)
     struct dirent *file;
     DIR *rep;
 
-    my_printf("total\n");
+    total_path(arg);
     rep = opendir(arg[2]);
     while (file = readdir(rep)) {
         if (file->d_name[0] != '.') {
