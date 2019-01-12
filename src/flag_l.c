@@ -92,12 +92,18 @@ void flag_l(int arc, char **arg)
     struct dirent *file;
     DIR *rep;
 
-    total_path(arg);
     rep = opendir(arg[2]);
-    while (file = readdir(rep)) {
-        if (file->d_name[0] != '.') {
-            print_info(file->d_name, arc, arg);
-            my_printf("%s\n",file->d_name);
+    if (rep == NULL) {
+        print_info2(arg[2]);
+        my_putchar('\n');
+    }
+    else {
+        total_path(arg);
+        while (file = readdir(rep)) {
+            if (file->d_name[0] != '.') {
+                print_info(file->d_name, arc, arg);
+                my_printf("%s\n",file->d_name);
+            }
         }
     }
     closedir(rep);
