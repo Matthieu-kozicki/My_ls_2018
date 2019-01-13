@@ -49,6 +49,7 @@ void print_info2(char *str)
         my_printf("%s  %d ", grp->gr_name, file.st_size);
         time = ctime(&(file.st_mtim.tv_sec));
         print_date(time);
+        my_printf("%s",str);
     }
     else
         my_printf("No such file or directory");
