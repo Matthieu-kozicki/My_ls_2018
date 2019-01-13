@@ -45,8 +45,8 @@ void print_info2(char *str)
         print_right(file);
         pwd = getpwuid(file.st_uid);
         grp = getgrgid(file.st_gid);
-        my_printf("%d %s  ", file.st_nlink, pwd->pw_name);
-        my_printf("%s  %d ", grp->gr_name, file.st_size);
+        my_printf("%d %s ", file.st_nlink, pwd->pw_name);
+        my_printf("%s %d ", grp->gr_name, file.st_size);
         time = ctime(&(file.st_mtim.tv_sec));
         print_date(time);
         my_printf("%s",str);
@@ -68,8 +68,8 @@ void print_info(char *str, int arc, char **arg)
     print_right(file);
     pwd = getpwuid(file.st_uid);
     grp = getgrgid(file.st_gid);
-    my_printf("%d %s  ", file.st_nlink, pwd->pw_name);
-    my_printf("%s  %d ", grp->gr_name, file.st_size);
+    my_printf("%d %s ", file.st_nlink, pwd->pw_name);
+    my_printf("%s %d ", grp->gr_name, file.st_size);
     time = ctime(&(file.st_mtim.tv_sec));
     print_date(time);
     free(path);
@@ -85,7 +85,7 @@ void flag_l_here(int arc, char **arg)
     while (file = readdir(rep)) {
         if (file->d_name[0] != '.') {
             print_info2(file->d_name);
-            my_printf("%s\n", file->d_name);
+            my_printf("\n");
         }
     }
     closedir(rep);
